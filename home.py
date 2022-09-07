@@ -1,12 +1,23 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from homeui import *
+import translate
 
 
 class home(QMainWindow, Ui_homeui):
-    def __init__(self, parent=None):
-        super(home, self).__init__(parent)
+    def __init__(self):
+        super(home, self).__init__()
         self.setupUi(self)
+        self.PushButton_1.clicked.connect(self.but_click)
+
+    def but_click(self):
+        search_str = self.lineEdit_1.text()
+        translate_result = translate.fanyi1(search_str)
+        self.textEdit_1.setText(translate_result)
+
+
+
+
 
 
 def home_run():
@@ -19,4 +30,4 @@ def home_run():
     # 程序运行，sys.exit方法确保程序完整退出。
     sys.exit(app.exec_())
 
-# home_run()
+#home_run()

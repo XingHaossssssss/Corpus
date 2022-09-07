@@ -8,6 +8,11 @@ import re
 import home
 
 
+
+# 不连接数据库
+u_list = ['admin']
+pwd_list = ['admin']
+
 # 登录界面
 class Login(object):
     def __init__(self):
@@ -40,6 +45,12 @@ class Login(object):
         lo_code = self.var_code.get()
         uname_ls = sql.u_name
         upwd_ls = sql.u_password
+
+
+        # 不连接数据库
+        uname_ls = u_list
+        upwd_ls = pwd_list
+
         null = ''
         if user_name == null:
             tk.messagebox.showerror(title='corpus error',
@@ -235,9 +246,16 @@ class Register(object):
                 if self.check_mobile(n_phone):
                     tk.messagebox.showinfo(title='corpus',
                                            message='注册成功！')
+                    '''
+                    # 连数据库
                     id = self.creat_uid()
                     data = (id, '001', n_name, n_pwd, n_email, n_phone, None)
                     sql.registered_insert(data)
+                    '''
+
+                    # 不连接数据库
+                    u_list.append(n_name)
+                    pwd_list.append(n_pwd)
 
                     self.window_registered.destroy()
                     Login().login()
@@ -257,5 +275,3 @@ class Register(object):
 
 def run():
     Login().login()
-
-
