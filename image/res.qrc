@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="image"/>
+  <qresource prefix="icon">
+    <file>icon/百度.png</file>
+    <file>icon/翻译.png</file>
+    <file>icon/谷歌.png</file>
+    <file>icon/有道.png</file>
+    <file>icon/头像.png</file>
+    <file>icon/close.png</file>
+    <file>icon/text.ico</file>
+    <file>icon/最大化.png</file>
+    <file>icon/最小化.png</file>
+  </qresource>
+</RCC>

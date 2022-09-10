@@ -1,14 +1,12 @@
-import requests
-import time
-import uuid
-import hashlib
 import urllib.request
 import urllib.parse
 import json
 
+
+# 有道翻译
 url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule'
 
-def fanyi1(word):
+def fanyi_youdao(word):
 
     data = {}
     data['i'] = word
@@ -37,9 +35,3 @@ def fanyi1(word):
     except:
         result = 'Translate failed'
     return result
-
-
-
-
-
-

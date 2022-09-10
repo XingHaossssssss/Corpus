@@ -2,16 +2,10 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 import mysqlconn as sql
-from PIL import Image, ImageTk
+# from PIL import Image, ImageTk
 from font import *
 import re
 import home
-
-
-
-# 不连接数据库
-u_list = ['admin']
-pwd_list = ['admin']
 
 # 登录界面
 class Login(object):
@@ -45,11 +39,6 @@ class Login(object):
         lo_code = self.var_code.get()
         uname_ls = sql.u_name
         upwd_ls = sql.u_password
-
-
-        # 不连接数据库
-        uname_ls = u_list
-        upwd_ls = pwd_list
 
         null = ''
         if user_name == null:
@@ -160,21 +149,16 @@ class Register(object):
         self.window_registered.title('corpus 注册')
         y = 30
         y_list = [y, y+40, y+80, y+120, y+160]
-        # new_name = tk.StringVar()
         tk.Label(self.window_registered, text='用户名', font=font_heiti()).place(x=50, y=y_list[0])
-        entry_new_name = tk.Entry(self.window_registered, textvariable=self.new_name).place(x=120, y=y_list[0])
-        # new_pwd = tk.StringVar()
+        tk.Entry(self.window_registered, textvariable=self.new_name).place(x=120, y=y_list[0])
         tk.Label(self.window_registered, text='密  码', font=font_heiti()).place(x=50, y=y_list[1])
-        entry_new_pwd = tk.Entry(self.window_registered, textvariable=self.new_pwd, show='*').place(x=120, y=y_list[1])
-        # re_new_pwd = tk.StringVar()
+        tk.Entry(self.window_registered, textvariable=self.new_pwd, show='*').place(x=120, y=y_list[1])
         tk.Label(self.window_registered, text='确认密码', font=font_heiti()).place(x=40, y=y_list[2])
-        re_entry_new_name = tk.Entry(self.window_registered, textvariable=self.re_new_pwd, show='*').place(x=120, y=y_list[2])
-        # new_email = tk.StringVar()
+        tk.Entry(self.window_registered, textvariable=self.re_new_pwd, show='*').place(x=120, y=y_list[2])
         tk.Label(self.window_registered, text='邮  箱', font=font_heiti()).place(x=50, y=y_list[3])
-        entry_email = tk.Entry(self.window_registered, textvariable=self.new_email).place(x=120, y=y_list[3])
-        # new_phone = tk.StringVar()
+        tk.Entry(self.window_registered, textvariable=self.new_email).place(x=120, y=y_list[3])
         tk.Label(self.window_registered, text='电  话', font=font_heiti()).place(x=50, y=y_list[4])
-        entry_phone = tk.Entry(self.window_registered, textvariable=self.new_phone).place(x=120, y=y_list[4])
+        tk.Entry(self.window_registered, textvariable=self.new_phone).place(x=120, y=y_list[4])
         tk.Button(self.window_registered, text='确认注册', font=font_heiti(), command=self.registered_but).place(x=115, y=240)
 
     def check_email(self, str):
@@ -213,10 +197,12 @@ class Register(object):
         n_email = self.new_email.get()
         n_phone = self.new_phone.get()
 
+
         # 获取数据库内容
         n_name_ls = sql.u_name
         m_name_ls = sql.m_name
         error = 'corpus error'
+
 
         # 判断输入框是否为空
         null = ''
@@ -246,17 +232,11 @@ class Register(object):
                 if self.check_mobile(n_phone):
                     tk.messagebox.showinfo(title='corpus',
                                            message='注册成功！')
-                    '''
+
                     # 连数据库
                     id = self.creat_uid()
                     data = (id, '001', n_name, n_pwd, n_email, n_phone, None)
                     sql.registered_insert(data)
-                    '''
-
-                    # 不连接数据库
-                    u_list.append(n_name)
-                    pwd_list.append(n_pwd)
-
                     self.window_registered.destroy()
                     Login().login()
                 else:
@@ -275,3 +255,4 @@ class Register(object):
 
 def run():
     Login().login()
+
